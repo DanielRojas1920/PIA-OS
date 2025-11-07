@@ -35,7 +35,8 @@ async def save_data(request: Request):
 @app.post("/edit/")
 async def edit_data(request: Request):
     new_data = await request.json()
-    index = new_data['id'] - 1
+
+    index = next((i for i in range(len(tasks)) if (i+1) == new_data['id']), 0)
 
     tasks[index] = new_data
 
@@ -44,9 +45,10 @@ async def edit_data(request: Request):
 @app.post("/delete/")
 async def delete_data(request: Request):
     response = await request.json()
-    id = response['id'] -1
 
-    tasks.pop(id)
+    index = next((i for i in range(len(tasks)) if (i+1) == response['id']), 0)
+
+    tasks.pop(index)
 
     return JSONResponse(content={"mensaje": "Tarea removida existosamente."})
 
