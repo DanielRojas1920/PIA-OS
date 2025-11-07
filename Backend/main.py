@@ -21,7 +21,7 @@ def return_new_id():
 
     return JSONResponse(content = {'new_id': new_id})
 
-@app.get("/save")
+@app.post("/save")
 async def save_data(request: Request):
     data = await request.json()
     id = data.get("id")
