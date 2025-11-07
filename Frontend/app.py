@@ -48,7 +48,7 @@ def edit(id):
 
     if request.method == "POST":
         task["title"] = request.form.get("title")
-        requests.post(f"http://backend:8000/edit/", payload = task)
+        requests.post(f"http://backend:8000/edit/", json = task)
         return redirect(url_for("index"))
 
     return render_template("edit.html", task=task)
@@ -59,7 +59,7 @@ def delete(id):
     
     payload = {'id': id}
 
-    request.post(f"http://backend:8000/delete/", payload = payload)
+    request.post(f"http://backend:8000/delete/", json = payload)
 
 
     return redirect(url_for("index"))
