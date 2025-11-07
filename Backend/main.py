@@ -36,7 +36,7 @@ async def save_data(request: Request):
 async def edit_data(request: Request):
     new_data = await request.json()
 
-    index = next((i for i in range(len(tasks)) if (i+1) == new_data['id']), 0)
+    index = next((i for i in range(len(tasks)) if tasks[i]['id'] == new_data['id']), 0)
 
     tasks[index] = new_data
 
@@ -46,7 +46,7 @@ async def edit_data(request: Request):
 async def delete_data(request: Request):
     response = await request.json()
 
-    index = next((i for i in range(len(tasks)) if (i+1) == response['id']), 0)
+    index = next((i for i in range(len(tasks)) if tasks[i]['id'] == response['id']), 0)
 
     tasks.pop(index)
 
