@@ -5,28 +5,28 @@ import time
 
 app = FastAPI()
 
-for i in range(10):
-    try:
-        conn = mysql.connector.connect(
-            host="db",
-            user="user",
-            password="SO.S7",
-            database="tasks_db",
-            port=3306,
-        )
-        if conn.is_connected():
-            print("Conexión exitosa a MySQL")
-            break
-    except Error as e:
-        print(f"Intento {i+1}: MySQL no disponible todavía ({e})")
-        time.sleep(3)
-else:
-    print("No se pudo conectar a MySQL después de varios intentos")
-
 
 
 @app.get("/get_data")
 def send_data():
+
+    for i in range(10):
+        try:
+            conn = mysql.connector.connect(
+                host="db",
+                user="user",
+                password="SO.S7",
+                database="tasks_db",
+                port=3306,
+            )
+            if conn.is_connected():
+                print("Conexión exitosa a MySQL")
+                break
+        except Error as e:
+            print(f"Intento {i+1}: MySQL no disponible todavía ({e})")
+            time.sleep(3)
+    else:
+        print("No se pudo conectar a MySQL después de varios intentos")
 
     cursor = conn.cursor(dictionary=True)
 
