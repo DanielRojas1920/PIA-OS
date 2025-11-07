@@ -43,7 +43,8 @@ async def edit_data(request: Request):
 
 @app.post("/delete/")
 async def delete_data(request: Request):
-    id = (await request.json()['id']) - 1
+    response = await request.json()
+    id = response['id'] -1
 
     tasks.pop(id)
 
