@@ -12,8 +12,6 @@ def index():
 
     tasks = requests.get("http://backend:8000/get_data").json()
 
-    print(tasks)
-
     return render_template("index.html", tasks=tasks)
 
 # Crear

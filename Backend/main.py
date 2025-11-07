@@ -14,7 +14,7 @@ def send_data():
 
     return JSONResponse(content = tasks)
 
-@app.get("/id_new")
+@app.get("/new_id")
 def return_new_id():
 
     new_id = max([t["id"] for t in tasks]) + 1 if tasks else 1
