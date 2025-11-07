@@ -8,27 +8,20 @@ tasks = [
     {"id": 2, "title": "Hacer un CRUD"},
 ]
 
-@app.get("/")
-def home():
-    return {"message": "¡Hola desde FastAPI en Docker!"}
 
-@app.get("/saludo/{nombre}")
-def saludo(nombre: str):
-    return {"saludo": f"Hola, {nombre}!"}
-
-@app.post("/get_data")
+@app.get("/get_data")
 def send_data():
 
     return JSONResponse(content = tasks)
 
-@app.post("/id_new")
+@app.get("/id_new")
 def return_new_id():
 
     new_id = max([t["id"] for t in tasks]) + 1 if tasks else 1
 
     return JSONResponse(content = {'new_id': new_id})
 
-@app.post("/save")
+@app.get("/save")
 async def save_data(request: Request):
     data = await request.json()
     id = data.get("id")
