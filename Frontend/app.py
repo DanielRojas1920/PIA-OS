@@ -33,7 +33,15 @@ def add():
 # Editar
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
 def edit(id):
-    tasks = requests.get("http://backend:8000/get_data").json()
+    try:
+        response = requests.get("http://backend:8000/get_data")
+        print("Código de respuesta:", response.status_code)
+        print("Contenido:", response.text)
+        tasks = response.json()
+    except Exception as e:
+        print("Error al obtener tasks:", e)
+        tasks = []
+
     task = next((t for t in tasks if t["id"] == id), None)
     if not task:
         return redirect(url_for("index"))
