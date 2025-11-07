@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import requests
-import os
+import time
 
 app = Flask(__name__)
 
@@ -37,7 +37,7 @@ def edit(id):
     try:
         
         response = requests.get("http://backend:8000/get_data")
-        os.sleep(3)
+        time.sleep(3)
         print("Código de respuesta:", response.status_code)
         print("Contenido:", response.text)
         tasks = response.json()
@@ -51,7 +51,7 @@ def edit(id):
 
     if request.method == "POST":
         task["title"] = request.form.get("title")
-        request.post(f"http://backend:8000/edit/", payload = task)
+        requests.post(f"http://backend:8000/edit/", payload = task)
         return redirect(url_for("index"))
 
     return render_template("edit.html", task=task)
