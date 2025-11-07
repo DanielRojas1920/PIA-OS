@@ -8,8 +8,8 @@ conn = mysql.connector.connect(
     host="db",          # nombre del servicio en docker-compose
     user="user",        # mismo que MYSQL_USER
     password="SO.S7",
-    database="tasks_db"
-    port = 3306
+    database="tasks_db",
+    port = 3306,
 )
 
 
