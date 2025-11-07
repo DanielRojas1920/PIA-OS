@@ -35,7 +35,7 @@ async def save_data(request: Request):
 @app.post("/edit/")
 async def edit_data(request: Request):
     new_data = await request.json()
-    index = new_data['id']
+    index = new_data['id'] - 1
 
     tasks[index] = new_data
 
