@@ -34,6 +34,7 @@ def add():
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
 async def edit(id):
     tasks = await requests.get("http://backend:8000/get_data").json()
+    print(tasks)
     task = next((t for t in tasks if t["id"] == id), None)
     if not task:
         return redirect(url_for("index"))
