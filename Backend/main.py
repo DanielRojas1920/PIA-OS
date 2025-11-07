@@ -31,6 +31,24 @@ async def save_data(request: Request):
 
     return JSONResponse(content={"mensaje": "Tarea guardada existosamente."})
 
+
+@app.post("/edit/")
+async def edit_data(request: Request):
+    new_data = await request.json()
+    index = new_data['id']
+
+    tasks[index] = new_data
+
+    return JSONResponse(content={"mensaje": "Tarea modificada existosamente."})
+
+@app.post("/delete/")
+async def delete_data(request: Request):
+    id = await request.json()['id']
+
+    tasks.pop(id)
+
+    return JSONResponse(content={"mensaje": "Tarea removida existosamente."})
+
 # Ejemplo de endpoint tipo POST
 @app.post("/sumar")
 def sumar(datos: dict):

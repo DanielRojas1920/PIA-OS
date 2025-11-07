@@ -33,21 +33,27 @@ def add():
 # Editar
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
 def edit(id):
+    tasks = requests.get("http://backend:8000/get_data").json()
     task = next((t for t in tasks if t["id"] == id), None)
     if not task:
         return redirect(url_for("index"))
 
     if request.method == "POST":
         task["title"] = request.form.get("title")
+        request.post(f"http://backend:8000/edit/", payload = task)
         return redirect(url_for("index"))
 
     return render_template("edit.html", task=task)
 
 # Eliminar
-@app.route("/delete/<int:id>")
+@app.route("/delete/<int:id>", methods = ["POST"])
 def delete(id):
-    global tasks
-    tasks = [t for t in tasks if t["id"] != id]
+    
+    payload = {'id': id}
+
+    request.post(f"http://backend:8000/delete/", payload = payload)
+
+
     return redirect(url_for("index"))
 
 if __name__ == "__main__":
