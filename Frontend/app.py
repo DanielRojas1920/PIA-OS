@@ -1,16 +1,17 @@
 from flask import Flask, render_template, request, redirect, url_for
+import requests
 
 app = Flask(__name__)
 
 # "Base de datos" temporal (lista)
-tasks = [
-    {"id": 1, "title": "Aprender Flask"},
-    {"id": 2, "title": "Hacer un CRUD"},
-]
+
 
 # Página principal - leer
 @app.route("/")
 def index():
+
+    tasks = requests.get("http://backend:8000/get_data")
+
     return render_template("index.html", tasks=tasks)
 
 # Crear
@@ -18,9 +19,16 @@ def index():
 def add():
     title = request.form.get("title")
     if title:
-        new_id = max([t["id"] for t in tasks]) + 1 if tasks else 1
-        tasks.append({"id": new_id, "title": title})
+        new_id = requests.get("http://backend:8000/new_id")['new_id']
+
+        payload = {'id': new_id, 'title': title}
+
+        requests.post("http://backend:8000/save", json = payload)
+
     return redirect(url_for("index"))
+
+
+# No útiles
 
 # Editar
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
