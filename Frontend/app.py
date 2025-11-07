@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route("/")
 def index():
 
-    tasks = requests.get("http://backend:8000/get_data")
+    tasks = requests.get("http://backend:8000/get_data").json()
 
     return render_template("index.html", tasks=tasks)
 
@@ -19,7 +19,7 @@ def index():
 def add():
     title = request.form.get("title")
     if title:
-        new_id = requests.get("http://backend:8000/new_id")['new_id']
+        new_id = requests.get("http://backend:8000/new_id").json()['new_id']
 
         payload = {'id': new_id, 'title': title}
 
