@@ -59,7 +59,7 @@ def delete(id):
     
     payload = {'id': id}
 
-    request.post(f"http://backend:8000/delete/", json = payload)
+    requests.post(f"http://backend:8000/delete/", json = payload)
 
 
     return redirect(url_for("index"))
