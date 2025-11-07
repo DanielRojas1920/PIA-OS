@@ -9,6 +9,7 @@ conn = mysql.connector.connect(
     user="user",        # mismo que MYSQL_USER
     password="SO.S7",
     database="tasks_db"
+    port = 3306
 )
 
 
@@ -20,7 +21,7 @@ def send_data():
 
     cursor = conn.cursor(dictionary=True)
 
-    cursor.execute("SELECT * FROM tasks")
+    cursor.execute("SELECT * FROM tasks;")
 
     tasks = cursor.fetchall()
 
@@ -37,7 +38,7 @@ async def save_data(request: Request):
 
     data = await request.json()
 
-    query = "INSERT INTO tasks (title) VALUES (%s)"
+    query = "INSERT INTO tasks (title) VALUES (%s);"
     values = (data['title'], )
 
     cursor.execute(query, values)
