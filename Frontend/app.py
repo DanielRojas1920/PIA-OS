@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import requests
+import os
 
 app = Flask(__name__)
 
@@ -34,6 +35,7 @@ def add():
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
 def edit(id):
     try:
+        os.sleep(3)
         response = requests.get("http://backend:8000/get_data")
         print("Código de respuesta:", response.status_code)
         print("Contenido:", response.text)
