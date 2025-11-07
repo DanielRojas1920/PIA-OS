@@ -1,33 +1,49 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+import mysql.connector
 
 app = FastAPI()
 
-tasks = [
-    {"id": 1, "title": "Aprender Flask"},
-    {"id": 2, "title": "Hacer un CRUD"},
-]
+conn = mysql.connector.connect(
+    host="db",          # nombre del servicio en docker-compose
+    user="user",        # mismo que MYSQL_USER
+    password="SO.S7",
+    database="tasks_db"
+)
+
+
+
 
 
 @app.get("/get_data")
 def send_data():
 
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("SELECT * FROM tasks")
+
+    tasks = cursor.fetchall()
+
+    cursor.close()
+
     return JSONResponse(content = tasks)
 
-@app.get("/new_id")
-def return_new_id():
-
-    new_id = max([t["id"] for t in tasks]) + 1 if tasks else 1
-
-    return JSONResponse(content = {'new_id': new_id})
+    
 
 @app.post("/save")
 async def save_data(request: Request):
-    data = await request.json()
-    id = data.get("id")
-    title = data.get('title')
 
-    tasks.append({'id': id, 'title': title})
+    cursor = conn.cursor(dictionary=True)
+
+    data = await request.json()
+
+    query = "INSERT INTO tasks (title) VALUES (%s)"
+    values = (data['title'], )
+
+    cursor.execute(query, values)
+    conn.commit()
+
+    cursor.close()
 
     return JSONResponse(content={"mensaje": "Tarea guardada existosamente."})
 

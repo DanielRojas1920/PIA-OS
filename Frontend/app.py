@@ -20,9 +20,8 @@ def index():
 def add():
     title = request.form.get("title")
     if title:
-        new_id = requests.get("http://backend:8000/new_id").json()['new_id']
 
-        payload = {'id': new_id, 'title': title}
+        payload = {'title': title}
 
         requests.post("http://backend:8000/save", json = payload)
 
