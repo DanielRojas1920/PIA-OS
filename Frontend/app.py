@@ -54,7 +54,7 @@ def edit(id):
     return render_template("edit.html", task=task)
 
 # Eliminar
-@app.route("/delete/<int:id>", methods = ["POST"])
+@app.route("/delete/<int:id>", methods = ["GET ,POST"])
 def delete(id):
     
     payload = {'id': id}
