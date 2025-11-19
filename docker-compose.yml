@@ -5,7 +5,7 @@ services:
     build: ./Frontend/
     container_name: flask_app
     ports:
-      - "8080:8080"
+      - "8081:8080"
     volumes:
       - ./Frontend:/app        
     depends_on:
