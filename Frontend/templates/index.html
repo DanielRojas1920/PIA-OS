@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CRUD en Flask</title>
+    <title>Lista de tareas</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
     <h1>Lista de tareas</h1>
 
-    <form method="POST" action="/add">
-        <input type="text" name="title" placeholder="Nueva tarea" required>
-        <button type="submit">Agregar</button>
-    </form>
+    <a href="/add" class="create-button">➕ Nueva tarea</a>
 
     <div id="card-container">
         {% for task in tasks %}

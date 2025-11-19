@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nueva tarea</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Agregar nueva tarea</h1>
+
+    <div class="card edit-card">
+        <form method="POST" action="/add">
+            <input type="text" name="title" placeholder="Nueva tarea" required>
+            <button type="submit">Agregar</button>
+        </form>
+
+        <a class="cancel-link" href="/">Cancelar</a>
+    </div>
+
+</body>
+</html>
