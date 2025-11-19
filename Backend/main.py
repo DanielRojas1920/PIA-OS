@@ -1,9 +1,11 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+from prometheus_fastapi_instrumentator import Instrumentator 
 import mysql.connector
 import time
-app = FastAPI()
 
+app = FastAPI()
+Instrumentator().instrument(app).expose(app)
 
 
 
