@@ -2,7 +2,7 @@ CREATE TABLE tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(100) NOT NULL,
     description TEXT,
-    created_at DATE
+    date DATE,
 );
 
 INSERT INTO tasks (title, description, created_at) 
