@@ -92,3 +92,11 @@ button:hover {
 .create-button:hover {
     background-color: #005fa3;
 }
+
+textarea {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    resize: vertical;
+    min-height: 80px;
+}

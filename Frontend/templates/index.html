@@ -13,7 +13,17 @@
     <div id="card-container">
         {% for task in tasks %}
         <div class="card">
-            <span>{{ task.title }}</span>
+            
+            <h2 class="task-title">{{ task.title }}</h2>
+
+            {% if task.description %}
+            <p class="task-description">{{ task.description }}</p>
+            {% endif %}
+
+            {% if task.date %}
+            <p class="task-date">📅 {{ task.date }}</p>
+            {% endif %}
+
             <div class="actions">
                 <a href="{{ url_for('edit', id=task.id) }}">✏️</a>
                 <a href="{{ url_for('delete', id=task.id) }}">🗑️</a>

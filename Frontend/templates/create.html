@@ -10,7 +10,12 @@
 
     <div class="card edit-card">
         <form method="POST" action="/add">
-            <input type="text" name="title" placeholder="Nueva tarea" required>
+            <input type="text" name="title" placeholder="Título" required>
+
+            <input type="date" name="date" required>
+
+            <textarea name="description" placeholder="Descripción" required></textarea>
+
             <button type="submit">Agregar</button>
         </form>
 
