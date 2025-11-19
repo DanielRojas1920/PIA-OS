@@ -3,6 +3,7 @@ from fastapi.responses import JSONResponse
 from prometheus_fastapi_instrumentator import Instrumentator
 import mysql.connector
 import time
+from datetime import date
 
 app = FastAPI()
 
