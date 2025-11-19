@@ -2,13 +2,20 @@
 <html>
 <head>
     <title>Editar tarea</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+
     <h1>Editar tarea</h1>
-    <form method="POST">
-        <input type="text" name="title" value="{{ task.title }}" required>
-        <button type="submit">Guardar</button>
-    </form>
-    <a href="/">Cancelar</a>
+
+    <div class="card edit-card">
+        <form method="POST">
+            <input type="text" name="title" value="{{ task.title }}" required>
+            <button type="submit">Guardar</button>
+        </form>
+
+        <a class="cancel-link" href="/">Cancelar</a>
+    </div>
+
 </body>
 </html>
