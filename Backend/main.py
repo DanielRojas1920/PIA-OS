@@ -34,6 +34,11 @@ def send_data():
     cursor.execute("SELECT * FROM tasks;")
     tasks = cursor.fetchall()
 
+    # Convertir fecha a string
+    for t in tasks:
+        if isinstance(t.get("date"), (date, )):
+            t["date"] = t["date"].isoformat()
+
     cursor.close()
     conn.close()
 
